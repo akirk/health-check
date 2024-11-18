@@ -21,7 +21,10 @@ abstract class Health_Check_Tool {
 		add_filter( 'health_check_tools_tab', array( $this, 'tab_setup' ) );
 	}
 
+	abstract public function set_description();
+
 	public function tab_setup( $tabs ) {
+		$this->set_description();
 		if ( ! isset( $this->label ) || empty( $this->label ) ) {
 			return $tabs;
 		}

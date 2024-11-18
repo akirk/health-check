@@ -3,6 +3,12 @@
 class Health_Check_Plugin_Compatibility extends Health_Check_Tool {
 
 	public function __construct() {
+		add_action( 'rest_api_init', array( $this, 'register_plugin_compat_rest_route' ) );
+
+		parent::__construct();
+	}
+
+	public function set_description() {
 		$this->label       = __( 'Plugin compatibility', 'health-check' );
 		$this->description = sprintf(
 			'%s<br>%s',
@@ -10,9 +16,6 @@ class Health_Check_Plugin_Compatibility extends Health_Check_Tool {
 			__( 'The compatibility check will need to send requests to the <a href="https://wptide.org">WPTide</a> project to fetch the test results for each of your plugins.', 'health-check' )
 		);
 
-		add_action( 'rest_api_init', array( $this, 'register_plugin_compat_rest_route' ) );
-
-		parent::__construct();
 	}
 
 	public function register_plugin_compat_rest_route() {
